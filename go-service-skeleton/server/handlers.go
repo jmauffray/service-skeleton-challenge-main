@@ -32,6 +32,7 @@ func (s *server) handlePostMessage() http.HandlerFunc {
 			rw.WriteHeader(http.StatusBadRequest)
 			return
 		}
+		message.IsPalindrome = IsPalindrome(message.Text)	
 		data.AddMessage(message)
 		rw.WriteHeader(http.StatusCreated)
 	}
@@ -93,3 +94,15 @@ func (s *server) handleDeleteMessage() http.HandlerFunc {
 		rw.WriteHeader(http.StatusNoContent)
 	}
 }
+
+func IsPalindrome(str string) bool {
+	lastIdx := len(str) - 1
+	// using for loop
+	for i := 0; i < lastIdx/2 && i < (lastIdx-i); i++ {
+	   if str[i] != str[lastIdx-i] {
+		  return false
+	   }
+	}
+	return true
+ }
+ 
