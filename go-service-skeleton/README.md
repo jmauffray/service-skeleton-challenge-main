@@ -21,6 +21,21 @@ Please run the following command to run all unit tests
 make test
 ```
 
+## Push message
+
+``` bash
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"messageText": "ama"}' \
+  http://localhost:8080//api/v1/messages
+
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"messageText": "amad"}' \
+  http://localhost:8080//api/v1/messages
+```
+
+
 ## API endpoints
 
 GET `/api/v1/messages` Returns all the messages

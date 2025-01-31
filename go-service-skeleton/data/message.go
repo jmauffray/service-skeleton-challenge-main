@@ -11,6 +11,7 @@ var ErrMessageNotFound = errors.New("no message found with the given ID")
 type Message struct {
 	ID     int    `json:"id"`
 	Text   string `json:"text"`
+	IsPalindrome   bool `json:"isPalindrome"`
 	Sender string `json:"sender"`
 	Time   string `json:"-"`
 }
