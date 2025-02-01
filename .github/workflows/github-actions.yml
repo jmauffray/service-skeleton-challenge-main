@@ -5,6 +5,7 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - run: pwd && ls -la ..
       - run: cd go-service-skeleton && make docker-build
       - run: cd go-service-skeleton && make docker-push
