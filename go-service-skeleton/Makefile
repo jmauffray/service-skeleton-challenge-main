@@ -15,7 +15,7 @@ build:
 start:
 	bin/${BINARY_NAME}
 
-docker:
+docker-build:
 	docker build -t go-service-image .
 
 docker-push:
