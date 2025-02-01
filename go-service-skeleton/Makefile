@@ -18,6 +18,9 @@ start:
 docker:
 	docker build -t go-service-image .
 
+docker-push:
+	docker push go-service-image
+
 docker-run:
 	docker run -p 8080:8080 go-service-image
 
