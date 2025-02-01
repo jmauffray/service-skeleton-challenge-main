@@ -53,6 +53,7 @@ The project has 5 endpoints:
 | GET    | /api/v1/messages/[ID] | Returns a specific record              |
 | POST   | /api/v1/messages      | Creates a new record                   |
 | DELETE | /api/v1/messages/[ID] | Deletes an existing record             |
+| GET    | /api/v1/health        | Get health                             |
 
 ## Tasks
 

@@ -32,7 +32,7 @@ func (s *server) handlePostMessage() http.HandlerFunc {
 			rw.WriteHeader(http.StatusBadRequest)
 			return
 		}
-		message.IsPalindrome = IsPalindrome(message.Text)	
+		message.IsPalindrome = IsPalindrome(message.Text)
 		data.AddMessage(message)
 		rw.WriteHeader(http.StatusCreated)
 	}
@@ -42,7 +42,7 @@ func (s *server) handlePostMessage() http.HandlerFunc {
 func (s *server) handleGetSingleMessage() http.HandlerFunc {
 	// a separate response for message
 	type response struct {
-		MessageText  string `json:"messageText"`
+		MessageText string `json:"messageText"`
 	}
 	return func(rw http.ResponseWriter, req *http.Request) {
 		// parse the request to fetch the id from the URI
@@ -95,14 +95,24 @@ func (s *server) handleDeleteMessage() http.HandlerFunc {
 	}
 }
 
+// handleGetHealth is the handler for GET request to fetch health
+// GET /health
+func (s *server) handleGetHealth() http.HandlerFunc {
+	return func(rw http.ResponseWriter, req *http.Request) {
+		s.logger.Info(req.Method, "Get health")
+		rw.Header().Set("Content-Type", "application/json; charset=utf-8")
+		rw.WriteHeader(http.StatusOK)
+		rw.Write([]byte(`{"alive": true}`))
+	}
+}
+
 func IsPalindrome(str string) bool {
 	lastIdx := len(str) - 1
 	// using for loop
 	for i := 0; i < lastIdx/2 && i < (lastIdx-i); i++ {
-	   if str[i] != str[lastIdx-i] {
-		  return false
-	   }
+		if str[i] != str[lastIdx-i] {
+			return false
+		}
 	}
 	return true
- }
- 
+}

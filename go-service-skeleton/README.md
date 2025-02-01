@@ -33,6 +33,10 @@ curl --header "Content-Type: application/json" \
   --request POST \
   --data '{"messageText": "amad"}' \
   http://localhost:8080//api/v1/messages
+
+curl --header "Content-Type: application/json" \
+  --request GET \
+  http://localhost:8080//api/v1/health
 ```
 
 
