@@ -16,7 +16,7 @@ start:
 	bin/${BINARY_NAME}
 
 docker-build:
-	docker build -t go-service-image -f Dockerfile .
+	DOCKER_BUILDKIT=0 docker build -t go-service-image -f Dockerfile .
 
 docker-push:
 	docker push go-service-image
