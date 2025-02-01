@@ -15,6 +15,12 @@ build:
 start:
 	bin/${BINARY_NAME}
 
+docker:
+	docker build -t go-service-image .
+
+docker-run:
+	docker run -p 8080:8080 go-service-image
+
 clean:
 	rm -fr bin
 
