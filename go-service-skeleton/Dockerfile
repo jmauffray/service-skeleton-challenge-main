@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN go build
+RUN go build -o bin/go-service
 
 FROM debian
 
