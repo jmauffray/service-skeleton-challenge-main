@@ -24,21 +24,28 @@ make test
 ## Push message
 
 ``` bash
-curl --header "Content-Type: application/json" \
+curl -v --header "Content-Type: application/json" \
   --request POST \
-  --data '{"messageText": "ama"}' \
-  http://localhost:8080//api/v1/messages
+  --data '{"text": "ama"}' \
+  http://localhost:8080/api/v1/messages
 
-curl --header "Content-Type: application/json" \
+curl -v --header "Content-Type: application/json" \
   --request POST \
-  --data '{"messageText": "amad"}' \
-  http://localhost:8080//api/v1/messages
+  --data '{"text": "amad"}' \
+  http://localhost:8080/api/v1/messages
 
-curl --header "Content-Type: application/json" \
+curl -v --header "Content-Type: application/json" \
   --request GET \
-  http://localhost:8080//api/v1/health
-```
+  http://localhost:8080/api/v1/messages
 
+curl -v --header "Content-Type: application/json" \
+  --request GET \
+  http://localhost:8080/health
+
+curl -v --header "Content-Type: application/json" \
+  --request GET \
+  http://localhost:8080/metrics
+```
 
 ## API endpoints
 
