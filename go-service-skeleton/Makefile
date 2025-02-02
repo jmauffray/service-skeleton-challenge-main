@@ -16,13 +16,13 @@ start:
 	bin/${BINARY_NAME}
 
 docker-build:
-	docker build -t go-service-image -f Dockerfile .
+	docker build -t go-service-image:0.1 -f Dockerfile .
 
 docker-push:
-	docker push go-service-image
+	docker push go-service-image:0.1
 
 docker-run:
-	docker run -p 8080:8080 go-service-image
+	docker run -p 8080:8080 go-service-image:0.1
 
 k3s-build:
 	docker run --privileged  --name k3s-server --hostname k3s-server --network=host -d rancher/k3s:v1.32.1-k3s1 server
@@ -34,7 +34,7 @@ k3s-build:
 
 k3s-start:
 	export KUBECONFIG=dist/k3s/config.yaml
-	kubectl run service-go --image=service-go --port=8080
+	kubectl run service-go --image=go-service-image:0.1 --port=8080
 
 helm-install:
 	export KUBECONFIG=dist/k3s/config.yaml
