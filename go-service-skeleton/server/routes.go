@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/google/uuid"
 	"sre.qlik.com/palindrome/logger"
 )
@@ -22,7 +23,9 @@ func (s *server) RegisterRoutes() {
 	s.router.HandleFunc("/messages", s.handlePostMessage()).Methods(http.MethodPost)
 	s.router.HandleFunc("/messages/{id}", s.handleGetSingleMessage()).Methods(http.MethodGet)
 	s.router.HandleFunc("/messages/{id}", s.handleDeleteMessage()).Methods(http.MethodDelete)
-	s.router.HandleFunc("/health", s.handleGetHealth()).Methods(http.MethodGet)
+	s.rootrouter.HandleFunc("/health", s.handleGetHealth()).Methods(http.MethodGet)
+	s.rootrouter.Handle("/metrics", promhttp.Handler())
+
 }
 
 // Logging middleware logs all the incoming requests

@@ -6,12 +6,14 @@ import (
 	"os"
 	"os/signal"
 	"time"
-
+	
+//	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/gorilla/mux"
 	"sre.qlik.com/palindrome/logger"
 )
 
 type server struct {
+	rootrouter *mux.Router
 	router *mux.Router
 	logger logger.Logger
 }
@@ -24,6 +26,7 @@ func NewServer() Server {
 	r := mux.NewRouter()
 	s := r.PathPrefix("/api/v1").Subrouter()
 	return &server{
+		rootrouter: r,
 		router: s,
 		logger: logger.GetLogger(),
 	}
@@ -33,7 +36,7 @@ func (srv *server) Start() {
 	srv.RegisterRoutes()
 	s := http.Server{
 		Addr:    ":" + servicePort,                          // configure the bind address
-		Handler: Tracing()(Logging(srv.logger)(srv.router)), // set the default handler
+		Handler: Tracing()(Logging(srv.logger)(srv.rootrouter)), // set the default handler
 		ReadTimeout:  5 * time.Second,   // max time to read request from the client
 		WriteTimeout: 10 * time.Second,  // max time to write response to the client
 		IdleTimeout:  120 * time.Second, // max time for connections using TCP Keep-Alive
